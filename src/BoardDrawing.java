@@ -10,32 +10,37 @@ import javax.swing.JPanel;
 //note: board does not change dynamically 
 //note: board shape and window aesthetics to be set
 //note: unification of colors not done
+/**
+ * Clase para diseño de pizarra.
+ *
+ * @author Raul Martínez Martínez
+ */
 public class BoardDrawing extends JPanel {
 
     /**
-     *
+     * Variables
      */
     int b = 0;
     int row = 8;
     int col = 8;
     ArrayList<Rectangle> cells;
-    //int player;
+
     int[] cellnos;
 
     BoardScreen bs;
-    //ArrayList<Portal> portals;
-    //ArrayList<Player> players;
 
+    /**
+     * Parametros.
+     *
+     * @param i Parametro i
+     * @param i1 Parametro il
+     * @param bs Parametro bs
+     */
     public BoardDrawing(int row, int col, BoardScreen bs) {
         this.bs = bs;
 
         this.row = row;
         this.col = col;
-        //player = 0;
-        //bs.players = new ArrayList<Player>();
-        //for(int i = 1;i <= bs.returnMaxPlayers();i++)
-        //    bs.players.add(new Player(i));
-        //get and add player(s) names
 
         cells = new ArrayList<Rectangle>();
 
@@ -67,9 +72,9 @@ public class BoardDrawing extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;//.create();
+        Graphics2D g2d = (Graphics2D) g;
 
-        //Create cells
+        //Crea celdas
         int width = getWidth();
         int height = getHeight();
 
@@ -92,6 +97,7 @@ public class BoardDrawing extends JPanel {
             }
         }
 
+        //Pinta celdas y numeros
         g2d.setColor(Color.white);
         for (Rectangle cell : cells) {
             g2d.fill(cell);
@@ -102,32 +108,40 @@ public class BoardDrawing extends JPanel {
             g2d.draw(cell);
         }
 
-        //Draw cells and numbers
-        //may have to modify program based on number of players
+        //Modifica el programa basandose en el numero de jugadores
         g2d.setColor(Color.BLUE);
-        int i = 0;                                // i is our visible numbering 
+
+        // i es el numero visible
+        int i = 0;
         for (Rectangle cell : cells) {
 
             String message = "" + cellnos[i];
+
+            //pinta la posición del jugador
             g2d.drawString(message, (int) cell.getCenterX(), (int) cell.getCenterY());
-            //g2d.setColor(Color.red);
 
-            //draw player position
+            //condición más de un jugador
             for (int pl = 0; pl < bs.maxPlayers; pl++) {
-                if (bs.players.get(pl).getPosition() == cellnos[i]) {                         //only one player considered here
+                if (bs.players.get(pl).getPosition() == cellnos[i]) {
 
-                    g2d.setColor(bs.players.get(pl).getPlayerColor());        //change to player color
-                    g2d.fillRect(cell.getLocation().x + pl * cellWidth / 4, cell.getLocation().y, cellWidth / 4, cellHeight / 4);//change to player position
+                    //Cambia el color del jugador
+                    g2d.setColor(bs.players.get(pl).getPlayerColor());
+                    //Cambia a posicion del jugador
+                    g2d.fillRect(cell.getLocation().x + pl * cellWidth / 4, cell.getLocation().y, cellWidth / 4, cellHeight / 4);
                     g2d.setColor(Color.blue);
                 }
             }
 
+            //Condicion más de un jugador
             if (cellnos[i] == row * col - 1) {
                 for (int pl = 0; pl < bs.maxPlayers; pl++) {
-                    if (bs.players.get(pl).getPosition() >= cellnos[i]) {                         //only one player considered here
+                    if (bs.players.get(pl).getPosition() >= cellnos[i]) {
 
-                        g2d.setColor(bs.players.get(pl).getPlayerColor());        //change to player color
-                        g2d.fillRect(cell.getLocation().x + pl * cellWidth / 4, cell.getLocation().y, cellWidth / 4, cellHeight / 4);//change to player position
+                        //Cambia el color del jugador
+                        g2d.setColor(bs.players.get(pl).getPlayerColor());
+
+                        //Cambia a posición jugador
+                        g2d.fillRect(cell.getLocation().x + pl * cellWidth / 4, cell.getLocation().y, cellWidth / 4, cellHeight / 4);
                         g2d.setColor(Color.blue);
                     }
                 }
@@ -165,13 +179,11 @@ public class BoardDrawing extends JPanel {
 
     }
 
-    /*
-	public void ensurePlayerPosition(){
-		for(Portal port :portals){
-			if(player == port.returnStart())
-				player = port.returnEnd();
-		}
-	}
+   
+    /**
+     *
+     * @param pnos
+     * @return posición
      */
     public String ensurePlayerPosition(int pnos) {
         String message = "";
@@ -188,10 +200,11 @@ public class BoardDrawing extends JPanel {
         return message;
     }
 
-    /*
-	public void setPlayer(int a){
-		player = a;
-	}
+    
+    /**
+     *
+     * @param a
+     * @param pnos
      */
     public void setPlayer(int a, int pnos) {
         bs.players.get(pnos).incPosition(a);

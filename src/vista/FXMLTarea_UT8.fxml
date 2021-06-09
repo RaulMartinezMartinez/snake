@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="846.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.FXMLTarea_UT8Controller">
+   <children>
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="428.0" prefWidth="1010.0">
+         <children>
+            <Pane id="pane1" fx:id="paneUsuario" layoutX="-11.0" prefHeight="462.0" prefWidth="1032.0">
+               <children>
+                  <Label layoutX="179.0" layoutY="84.0" text="Datos Usuario">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="56.0" layoutY="137.0" text="Nombre">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="56.0" layoutY="174.0" text="Apellidos">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="56.0" layoutY="213.0" text="DNI">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="56.0" layoutY="252.0" text="Fecha nacimiento">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="56.0" layoutY="297.0" text="Grupo">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="386.0" layoutY="134.0" text="Sexo">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="sexoH" layoutX="367.0" layoutY="167.0" mnemonicParsing="false" onAction="#getHombre" text="Hombre">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="sex" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="sexoM" layoutX="367.0" layoutY="203.0" mnemonicParsing="false" onAction="#getMujer" text="Mujer" toggleGroup="$sex">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <Button fx:id="limpiar" layoutX="382.0" layoutY="274.0" mnemonicParsing="false" onAction="#Clear" text="Limpiar">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="stNombre" layoutX="170.0" layoutY="133.0" />
+                  <TextField fx:id="stApellidos" layoutX="170.0" layoutY="171.0" />
+                  <TextField fx:id="stDni" layoutX="170.0" layoutY="209.0" />
+                  <DatePicker fx:id="fechaNacimiento" layoutX="170.0" layoutY="249.0" onAction="#getFecha" />
+                  <ComboBox fx:id="grupo" layoutX="170.0" layoutY="296.0" onAction="#getGrupo" prefWidth="150.0" />
+                  <Label layoutX="744.0" layoutY="27.0" text="Usuarios">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="insertarUsuario" layoutX="589.0" layoutY="392.0" mnemonicParsing="false" onAction="#getUsuario" text="Insertar usuario">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <TableView fx:id="lista" layoutX="521.0" layoutY="73.0" onMouseClicked="#pulsarUsuario" prefHeight="304.0" prefWidth="478.0">
+                    <columns>
+                      <TableColumn fx:id="listaNombre" prefWidth="84.0" text="Nombre" />
+                      <TableColumn fx:id="listaApellidos" prefWidth="81.0" text="Apellidos" />
+                        <TableColumn fx:id="listaDni" prefWidth="76.0" text="DNI" />
+                        <TableColumn fx:id="listaFecha" prefWidth="77.0" text="Fecha nacimiento" />
+                        <TableColumn fx:id="listaGrupo" prefWidth="82.0" text="Grupo" />
+                        <TableColumn fx:id="listaSexo" prefWidth="76.0" text="Sexo" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="726.0" layoutY="436.0" text="Eventos covid">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="borrarUsuario" layoutX="823.0" layoutY="392.0" mnemonicParsing="false" onAction="#deleteUsuario" text="Borrar usuario">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane layoutX="532.0" layoutY="500.0" prefHeight="274.0" prefWidth="478.0">
+         <children>
+            <ListView fx:id="listaEventos" layoutY="2.0" prefHeight="271.0" prefWidth="478.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="paneSeleccion" layoutX="14.0" layoutY="471.0" prefHeight="119.0" prefWidth="485.0">
+         <children>
+            <RadioButton fx:id="pruebaContagio" layoutX="176.0" layoutY="23.0" mnemonicParsing="false" onAction="#Contagio" text="Prueba contagio">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="tipoEvento" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="pruebaVacunacion" layoutX="311.0" layoutY="23.0" mnemonicParsing="false" onAction="#Vacunacion" text="Vacunación" toggleGroup="$tipoEvento">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <Label layoutX="56.0" layoutY="25.0" text="Tipo de prueba">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="fechaEvento" layoutX="239.0" layoutY="68.0" />
+            <Label layoutX="56.0" layoutY="71.0" text="Fecha evento">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="panePrueba" layoutX="14.0" layoutY="592.0" prefHeight="109.0" prefWidth="502.0">
+         <children>
+            <Label layoutX="56.0" layoutY="14.0" text="Resultado">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="56.0" layoutY="64.0" text="Tipo de prueba">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="resultadoPositivo" layoutX="187.0" layoutY="16.0" mnemonicParsing="false" onAction="#rPositivo" text="Positivo">
+               <toggleGroup>
+                  <ToggleGroup fx:id="resultado" />
+               </toggleGroup>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="resultadoNegativo" layoutX="325.0" layoutY="16.0" mnemonicParsing="false" onAction="#rNegativo" text="Negativo" toggleGroup="$resultado">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <ComboBox fx:id="comboPrueba" layoutX="254.0" layoutY="62.0" prefWidth="150.0" />
+            <Button fx:id="añadirPrueba" layoutX="451.0" layoutY="62.0" mnemonicParsing="false" onAction="#getContagio" text="Añadir" />
+         </children>
+      </Pane>
+      <Pane fx:id="paneVacunacion" layoutX="14.0" layoutY="694.0" prefHeight="109.0" prefWidth="510.0">
+         <children>
+            <TextField fx:id="numeroDosis" layoutX="256.0" layoutY="21.0" prefHeight="25.0" prefWidth="39.0" />
+            <Label layoutX="56.0" layoutY="21.0" text="Número de dosis">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="56.0" layoutY="65.0" text="Nombre de la vacuna">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="nombreVacuna" layoutX="256.0" layoutY="63.0" prefWidth="150.0" />
+            <Button fx:id="añadirVacuna" layoutX="454.0" layoutY="65.0" mnemonicParsing="false" onAction="#getVacuna" text="Añadir" />
+         </children>
+      </Pane>
+      <Button fx:id="insertarEvento" layoutX="589.0" layoutY="793.0" mnemonicParsing="false" onAction="#getEvento" text="Insertar evento">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="borrarEventos" layoutX="823.0" layoutY="792.0" mnemonicParsing="false" onAction="#deleteEventos" text="Borrar eventos">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
